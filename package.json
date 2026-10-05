@@ -1,0 +1,24 @@
+{
+  "name": "careertrack",
+  "version": "1.0.0",
+  "description": "CareerTrack - Job & Internship Application Tracker Mini Project FSD",
+  "type": "module",
+  "scripts": {
+    "server": "npm run start --prefix server",
+    "server:dev": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "client:build": "npm run build --prefix client",
+    "seed": "npm run seed --prefix server",
+    "dev": "node scripts/start-all.js"
+  },
+  "keywords": [
+    "job-tracker",
+    "internship-tracker",
+    "react",
+    "express",
+    "mongodb",
+    "full-stack"
+  ],
+  "author": "CareerTrack Team",
+  "license": "MIT"
+}
