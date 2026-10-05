@@ -94,7 +94,7 @@ export function Dashboard() {
               <Sparkles className="w-3.5 h-3.5" /> CODEFORGE PLATFORM
             </div>
             <h1 className="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
-              Good morning, {user?.name || 'Alex'} 👋
+              Good morning, {user?.name || 'Omkar'} 👋
             </h1>
             <p className="mt-2 text-slate-400 max-w-xl text-sm sm:text-base">
               Continue your learning journey. Build full-stack applications, solve coding challenges, and track your daily progress.

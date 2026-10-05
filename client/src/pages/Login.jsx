@@ -36,7 +36,7 @@ export const Login = () => {
     try {
       setIsLoading(true);
       await login({ email: 'alex.rivera@university.edu', password: 'password123' });
-      toast.success('Logged in as Student (Alex Rivera)!');
+      toast.success('Logged in as Student (Omkar Nath Prabhujee)!');
       navigate('/dashboard');
     } catch (err) {
       toast.error('Demo student login failed.');
@@ -130,7 +130,7 @@ export const Login = () => {
             disabled={isLoading}
             className="w-full py-2.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-semibold text-xs transition-colors flex items-center justify-center gap-2"
           >
-            <span>Quick Demo Student Login (Alex)</span>
+            <span>Quick Demo Student Login (Omkar)</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
 

@@ -23,7 +23,7 @@ const autoSeedCodeCareer = async () => {
     let student = await User.findOne({ email: 'alex.rivera@university.edu' });
     if (!student) {
       student = await User.create({
-        name: 'Alex Rivera',
+        name: 'Omkar Nath Prabhujee',
         email: 'alex.rivera@university.edu',
         password: hashedPassword,
         role: 'student',
@@ -43,7 +43,10 @@ const autoSeedCodeCareer = async () => {
           geeksforgeeks: 'alexrivera_gfg',
         },
       });
-      console.log('✅ Student demo user initialized (alex.rivera@university.edu)');
+      console.log('✅ Student demo user initialized (Omkar Nath Prabhujee)');
+    } else {
+      await User.findByIdAndUpdate(student._id, { name: 'Omkar Nath Prabhujee' });
+      student.name = 'Omkar Nath Prabhujee';
     }
 
     // 2. Admin user
@@ -164,13 +167,30 @@ const autoSeedCodeCareer = async () => {
   }
 };
 
+let cached = global.mongoose;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  const connStr = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/codecareer';
+
   try {
-    const connStr = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/codecareer';
-    const conn = await mongoose.connect(connStr);
-    console.log(`[MongoDB] Connected to database: ${conn.connection.host}`);
-    await autoSeedCodeCareer();
+    if (!cached.promise) {
+      cached.promise = mongoose.connect(connStr, { serverSelectionTimeoutMS: 2500 }).then(async (m) => {
+        console.log(`[MongoDB] Connected to database: ${m.connection.host}`);
+        await autoSeedCodeCareer();
+        return m;
+      });
+    }
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
+    cached.promise = null;
     console.warn(`[MongoDB] Could not connect to local/URI database (${error.message}). Starting disk-backed MongoDB database...`);
     try {
       const { MongoMemoryServer } = await import('mongodb-memory-server');
@@ -186,9 +206,10 @@ const connectDB = async () => {
         instance: { dbPath: dbDir, storageEngine: 'wiredTiger' },
       });
       const uri = mongod.getUri();
-      await mongoose.connect(uri);
+      cached.conn = await mongoose.connect(uri);
       console.log(`[MongoDB] Persistent Database initialized successfully at ${dbDir}`);
       await autoSeedCodeCareer();
+      return cached.conn;
     } catch (err) {
       console.error('[MongoDB] Fatal error initializing persistent database:', err.message);
     }

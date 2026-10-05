@@ -10,7 +10,11 @@ import Course from '../models/Course.js';
 export const getDashboardStats = async (req, res) => {
   try {
     const userId = req.user._id;
-    const user = await User.findById(userId).select('-password');
+    let user = await User.findById(userId).select('-password');
+    if (user && (user.name === 'Alex Rivera' || !user.name)) {
+      await User.findByIdAndUpdate(userId, { name: 'Omkar Nath Prabhujee' });
+      user.name = 'Omkar Nath Prabhujee';
+    }
 
     // Stats calculations from database
     const enrollments = await Enrollment.find({ user: userId }).populate('course');

@@ -1,15 +1,25 @@
 {
-  "name": "careertrack",
+  "name": "codeforge",
   "version": "1.0.0",
-  "description": "CareerTrack - Job & Internship Application Tracker Mini Project FSD",
+  "description": "CodeForge - Job & Internship Application Tracker and Online Learning Platform",
   "type": "module",
   "scripts": {
+    "build": "npm --prefix client run build",
+    "postinstall": "npm --prefix server install && npm --prefix client install",
     "server": "npm run start --prefix server",
     "server:dev": "npm run dev --prefix server",
     "client": "npm run dev --prefix client",
     "client:build": "npm run build --prefix client",
     "seed": "npm run seed --prefix server",
     "dev": "node scripts/start-all.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0"
   },
   "keywords": [
     "job-tracker",
@@ -19,6 +29,6 @@
     "mongodb",
     "full-stack"
   ],
-  "author": "CareerTrack Team",
+  "author": "CodeForge Team",
   "license": "MIT"
 }

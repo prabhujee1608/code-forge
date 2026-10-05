@@ -812,7 +812,7 @@ export function PerformanceTracking() {
                   <div className="bg-cyan-400 h-full rounded-full" style={{ width: '80%' }} />
                 </div>
                 <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Instructor: Alex Rivera</span>
+                  <span>Instructor: Omkar Nath Prabhujee</span>
                   <Link
                     to="/courses/full-stack-web-development"
                     className="text-indigo-400 hover:text-indigo-300 font-bold inline-flex items-center gap-1"

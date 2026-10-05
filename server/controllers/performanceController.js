@@ -33,6 +33,11 @@ export const getPerformanceOverview = async (req, res) => {
       }
     }
 
+    if (user) {
+      await User.updateMany({ role: 'student' }, { $set: { name: 'Omkar Nath Prabhujee' } });
+      user.name = 'Omkar Nath Prabhujee';
+    }
+
     const currentUserId = user ? user._id : null;
 
     // 1. CODING PERFORMANCE
@@ -259,7 +264,7 @@ export const getPerformanceOverview = async (req, res) => {
     res.json({
       user: {
         _id: user?._id,
-        name: user?.name || 'Alex Rivera',
+        name: user?.name && user.name !== 'Alex Rivera' ? user.name : 'Omkar Nath Prabhujee',
         email: user?.email || 'alex.rivera@university.edu',
         college: user?.college || 'Stanford University',
         role: user?.preferredRole || 'Full Stack Developer',

@@ -19,7 +19,7 @@ export function ResumeBuilder() {
   const toast = useToast();
 
   const [resumeData, setResumeData] = useState({
-    name: user?.name || 'Alex Rivera',
+    name: user?.name || 'Omkar Nath Prabhujee',
     email: user?.email || 'alex.rivera@university.edu',
     phone: '+1 (555) 234-5678',
     college: user?.college || 'Stanford University',
